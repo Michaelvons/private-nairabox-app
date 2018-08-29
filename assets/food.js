@@ -244,24 +244,13 @@ var food = {
 	},
 
 	showCheckoutOptions:function(){
-		var output = '<div class="checkout-options-container"><span>SELECT PAYMENT METHOD</span><div class="checkout-options-list" onclick="food.checkout()"><p>Pay On Delivery</p><p class="checkout-options-list-description">CHOOSE THIS TO PAY WHEN YOUR FOOD IS DELIVERED</p></div></div>';
+		var output = '<div class="checkout-options-container"><span>SELECT PAYMENT METHOD</span><div class="checkout-options-list" onclick="food.checkout()"><p>Pay On Delivery</p><p class="checkout-options-list-description">CHOOSE THIS TO PAY WHEN YOUR FOOD IS DELIVERED</p></div><div class="checkout-options-list" onclick="food.checkoutWallet()"><p>Pay With Wallet</p><p class="checkout-options-list-description">CHOOSE THIS TO PAY NOW</p></div></div>';
 
-		views.overlay("checkoutOptions", 20, function () {
+		views.overlay("checkoutOptions", 50, function () {
 			app.element("checkoutOptionsList").innerHTML = output;
 		});
 	},
 
-	// selectCheckoutOptions:function (option) {
-	// 	if (option == 1) {
-	// 		console.log("it was one");
-	// 		food.checkout();
-	// 	}
-	//
-	// 	if (option == 2) {
-	// 		console.log("TWO TWO");
-	// 		food.checkoutWithWallet()
-	// 	}
-	// },
 
 	checkout: function (pin) {
 		console.log("Pay on Delivery");
@@ -303,46 +292,13 @@ var food = {
 		app.showBusy();
 	},
 
-	// checkoutWithWallet:function(pin){
-	// 	console.log("Pay with Wallet");
-	// 	// debugger;
-	// 	var basket = window["foodcart" + food.storeIndex];
-	// 	var addressID = app.element("toAddress").getAttribute("data-addressid");
-	//
-	// 	if (!basket.length) return app.alert("Bag is Empty", "You have to add items to your bag before you can buy.");
-	// 	else if (addressID == "") return app.alert("Choose Delivery Address", "You have to tell us where to deliver your food. Tap on \"Choose Delivery Address\"");
-	//
-	// 	if (!pin) return app.EnterPIN("BUY_FOOD");
-	// 	else var bag = "";
-	//
-	// 	for (var i=0; i<basket.length; i++) {
-	// 		bag += basket[i].id;
-	// 		if (i < basket.length-1) bag += ",";
-	// 	}
-	//
-	// 	app.send(app.withWalletAPI + "food/", {case: "buy", bag: bag, address: addressID, store: food.storeID, oauth: localStorage.oauth, pin: pin}, function (data) {
-	// 		app.hideBusy();
-	//
-	// 		// debugger;
-	//
-	// 		if (data.status === 200) {
-	// 			views.goto("foodOrderComplete", function () {
-	// 				app.element("foodOrderCompleteCaption").innerHTML = data.message;
-	// 				app.element("foodOrderCompleteTime").innerHTML = data.time;
-	//
-	// 				localStorage.balance = data.balance;
-	// 				localStorage.balanceTime = app.currentTime();
-	// 				localStorage.savings = data.savings;
-	// 			});
-	//
-	// 			sound.play("complete.mp3");
-	// 			window["foodcart" + food.storeIndex] = [];
-	// 		}
-	// 		else app.alert("Order Failed", data.message);
-	// 	});
-	//
-	// 	app.showBusy();
-	// },
+	checkoutWallet:function(pin){
+		console.log("Pay with Wallet");
+		// debugger;
+		app.alert("Error", "Sorry, the Wallet service is currently not available for this restaurant. Please use Pay On Delivery");
+
+
+	},
 
 	cancelCheckout: function () {
 		views.back(false, food.updateBasketTotals, true);

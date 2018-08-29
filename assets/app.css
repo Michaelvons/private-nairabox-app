@@ -3690,6 +3690,7 @@ button.headlessButton {
 .checkout-options-container{
 	padding: 16px;
 	background-color: #dadada;
+	height: 100%;
 }
 
 .checkout-options-list{
